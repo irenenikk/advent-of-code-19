@@ -1,9 +1,6 @@
 import math
 import sys
 
-def is_opcode(code):
-    return code == 1 or code == 2 or code == 9
-
 def operate(val1, val2, opcode):
     result = None
     if opcode == 1:
@@ -29,14 +26,11 @@ def calculate_intcode(inp):
         i += 4
     return inp
 
-inp_file = sys.argv[1]
-original_inp = list(map(int, open(inp_file, "r").read().split(',')))
-# replace values according to instructions
-for i in range(100):
-    for j in range(100):
-        inp = original_inp[:]
-        inp[1] = i
-        inp[2] = j
-        inp = calculate_intcode(inp)
-        if inp[0] == 19690720:
-            print(100*inp[1] + inp[2])
+if __name__ == '__main__':
+    inp_file = sys.argv[1]
+    inp = list(map(int, open(inp_file, "r").read().split(',')))
+    # replace values according to instructions
+    inp[1] = 12
+    inp[2] = 2
+    inp = calculate_intcode(inp)
+    print(inp[0])
